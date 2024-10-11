@@ -13,7 +13,9 @@ yarn-error.log*
 lerna-debug.log*
 
 docker-compose.yml
-
+/prisma
+prisma/
+prisma
 # OS
 .DS_Store
 
