@@ -30,11 +30,17 @@ export class TasksService {
     return this.prisma.task.update({ where: { id }, data: { completed: true } });
   }
 
-  update(id: number, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
+  update(id: string, updateTaskDto: UpdateTaskDto) {
+   
+    const taskCompleted = this.findOne(id);
+    if(!taskCompleted) throw new Error('Task not found');
+    return this.prisma.task.update({ where: { id }, data: { ...updateTaskDto } });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} task`;
+  remove(id: string) {
+    const taskCompleted = this.findOne(id);
+    if(!taskCompleted) throw new Error('Task not found');
+    return this.prisma.task.delete({ where: { id } });
+    
   }
 }
